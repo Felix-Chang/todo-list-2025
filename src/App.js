@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 
 function App() {
     const [tasks, setTasks] = useState([]);
+    const [taskName, setTaskName] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
         if (tasks.length === 0) return;
@@ -16,11 +18,35 @@ function App() {
         if (tasks) setTasks(tasks);
     }, []);
 
-    const handleAddTask = (name) => {
-        setTasks((prev) => {
-            return [...prev, { taskName: name, done: false }];
-        });
+    const handleInputChange = (input) => {
+        setTaskName(input);
+
+        if (input.trim() && input.length <= 50) {
+            setErrorMessage("");
+        } else if (input.length >= 50) {
+            setErrorMessage("Task name cannot exceed 50 characters");
+        }
     };
+
+    const handleAddTask = (e) => {
+        e.preventDefault();
+        const trimmedName = taskName.trim();
+
+        if (!trimmedName) {
+            setErrorMessage("Please enter a task name");
+            return;
+        } 
+
+        if (trimmedName.length > 50) {
+            setErrorMessage("Task name cannot exceed 50 characters");
+            return;
+    }
+
+        setTasks((prev) => [...prev, { taskName: trimmedName, done: false }]);
+        setTaskName("")
+        setErrorMessage("");
+        }
+    
 
     const handleUpdateTask = (taskIndex, newDone) => {
         setTasks((prev) => {
@@ -66,7 +92,12 @@ function App() {
                 {numberComplete}/{numberTotal} Complete
             </h1>
             <h2 className="message">{getMessage()}</h2>
-            <TaskForm onAdd={handleAddTask} />
+            {errorMessage && <h3 className="error-message">{errorMessage}</h3>}
+            <TaskForm
+                value={taskName}
+                onAdd={handleAddTask}
+                onChange={handleInputChange}
+            />
             {tasks.map((task, index) => (
                 <Task
                     {...task}

@@ -1,12 +1,15 @@
 body{
   background-color: #17181f;
   color: #ddd;
+  height: 100%;
+  margin: 0;
 }
 
 main {
-  max-width: 300px;
+  max-width: 40%;
   margin: 0 auto;
-
+  align-items: center;
+  border: 2px solid red;
 }
 
 .add-task-container {
@@ -27,22 +30,15 @@ main {
 }
 
 .add-task-button {
+  text-align: center;
   background-color: #61dafb;
   border: 0;
   border-radius: 6px;
   cursor: pointer;
+  padding-bottom: 3px;
+  padding-left: 6px;
+  padding-right: 6px;
 }
-
-/* .task {
-  
-} */
-
-/* div.taskdone svg {
-  height: 20px;
-  margin-right: 6px;
-  fill: #61dafb;
-
-} */
 
 .checkbox-checked {
   cursor: pointer;
@@ -83,7 +79,7 @@ main {
   background-color: #30313d;
   border-radius: 10px;
   padding: 5px 9px;
-  margin-top: 5px;
+  margin: 5px;
   display: flex;
   transition: opacity .3s linear;
   align-items: center;
@@ -118,4 +114,16 @@ main {
   border: 2px solid #777;
   border-radius: 5px;
   padding: 0px;
+}
+
+.error-message {
+  color: red;
+  text-align: center;
+  animation: pop 0.5s ease;
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
