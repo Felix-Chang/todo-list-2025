@@ -9,7 +9,7 @@ main {
   max-width: 40%;
   margin: 0 auto;
   align-items: center;
-  border: 2px solid red;
+  /* border: 2px solid red; */
 }
 
 .add-task-container {
